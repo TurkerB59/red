@@ -5,8 +5,16 @@ from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 import time
+import os
 
+# Set Flask configuration from environment variables
 app = Flask(__name__)
+
+# Set the secret key from environment variables (if available)
+app.secret_key = os.getenv('SECRET_KEY', 'your_default_secret_key')  # Set a default for local development
+
+# Set Flask environment to production in Render
+app.config['ENV'] = os.getenv('FLASK_ENV', 'production')
 
 # Configure Selenium WebDriver
 chrome_options = Options()
@@ -54,4 +62,6 @@ def check_redirects():
     return send_file(csv_file, as_attachment=True)
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5001, debug=True)
+    # Use the dynamic port provided by Render
+    port = os.getenv('PORT', 5001)  # Default to 5001 if not specified by Render
+    app.run(host='0.0.0.0', port=int(port), debug=False)  # Set debug=False in production
