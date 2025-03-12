@@ -25,7 +25,7 @@ chrome_options.add_argument("--disable-dev-shm-usage")
 chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36")
 
 # Add this line to point to Chromium on Render
-chrome_options.binary_location = "/usr/bin/chromium-browser"
+chrome_options.binary_location = "/usr/bin/google-chrome"
 
 # Homepage with URL input
 @app.route('/')
