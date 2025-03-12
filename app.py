@@ -21,7 +21,11 @@ chrome_options = Options()
 chrome_options.add_argument("--headless")
 chrome_options.add_argument("--disable-gpu")
 chrome_options.add_argument("--no-sandbox")
+chrome_options.add_argument("--disable-dev-shm-usage")
 chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36")
+
+# Add this line to point to Chromium on Render
+chrome_options.binary_location = "/usr/bin/chromium-browser"
 
 # Homepage with URL input
 @app.route('/')
@@ -63,5 +67,5 @@ def check_redirects():
 
 if __name__ == "__main__":
     # Use the dynamic port provided by Render
-    port = os.getenv('PORT', 5001)  # Default to 5001 if not specified by Render
+    port = os.getenv('PORT', 5002)  # Default to 5001 if not specified by Render
     app.run(host='0.0.0.0', port=int(port), debug=False)  # Set debug=False in production
